@@ -17,12 +17,8 @@ rl.on('line', function (line) {
 
   arrA.sort((a, b) => a - b);
   for (const minA of arrA) {
-    const maxB = Math.max(...arrB);
+    const [maxB] = arrB.splice(arrB.indexOf(Math.max(...arrB)), 1);
     minSumAB += minA * maxB;
-    arrB.splice(
-      arrB.findIndex((v) => v === maxB),
-      1
-    );
   }
   console.log(minSumAB);
 });
