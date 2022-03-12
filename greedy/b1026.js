@@ -11,14 +11,18 @@ rl.on('line', function (line) {
   input.push(line.trim());
 }).on('close', function () {
   const n = Number(input[0]);
-  const a = input[1].split(' ').map((v) => +v);
-  const b = input[2].split(' ').map((v) => +v);
+  const arrA = input[1].split(' ').map((v) => +v);
+  const arrB = input[2].split(' ').map((v) => +v);
+  let minSumAB = 0;
 
-  const bClone = [...b].sort((a, b) => a - b);
-  a.sort((a, b) => b - a);
-  let answer = 0;
-  for (let i = 0; i < n; i++) {
-    answer += a[i] * bClone[i];
+  arrA.sort((a, b) => a - b);
+  for (const minA of arrA) {
+    const maxB = Math.max(...arrB);
+    minSumAB += minA * maxB;
+    arrB.splice(
+      arrB.findIndex((v) => v === maxB),
+      1
+    );
   }
-  console.log(answer);
+  console.log(minSumAB);
 });
